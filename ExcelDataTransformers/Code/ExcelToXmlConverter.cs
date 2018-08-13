@@ -25,14 +25,7 @@ namespace ExcelToXmlConverter
             // XLSX - Excel 2007, 2010, 2012, 2013
             //@"Provider=Microsoft.ACE.OLEDB.12.0;Extended Properties=Excel 12.0 XML;Data Source=" + FILE_PATH + ";"
 
-
-            //const string SOURCE_PATH = @"c:\temp\";
-            //const string FILE_1 = "Minhast_Nouns_TestReadByExcelDll.xls";  //DO NOT NAME YOUR SHEETS!  And use "Paste Special" when doing the transfer to subsidieary sheets!
-            //const string FILE_2 = "Minhast_Verbs_TestReadByExcelDll.xls";
-            //const string FILE_3 = "Minhast_Vocabulary_TestReadAllByExcelDll.xls";
-            //const string FILE_NAME = FILE_3;
-            //const string FILE_PATH = SOURCE_PATH + FILE_NAME;
-            //const string OUTPUT_FILE = FILE_PATH + ".xml";
+            //const string FILE = "MySpreadsheet.xls";  //DO NOT NAME YOUR SHEETS!  And use "Paste Special" when doing the transfer to subsidieary sheets!
 
             const string PRESS_ANY_KEY_TO_EXIT = "\n\n\nPress any key to exit.";
 
