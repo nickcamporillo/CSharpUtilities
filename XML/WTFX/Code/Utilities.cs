@@ -11,101 +11,10 @@ using WTF.Core.FileSystem;
 using WTF.Core.Xml;
 using System.Security.Principal;
 
-namespace TmoLibrary.Common
+namespace TMO.WTFX.Xml
 {
-    public static class Utilities
-    {
-        /// <summary>
-        /// WARNING: This is a case-sensitive function, because C# properties are case-sensitive when using Reflection!
-        /// </summary>
-        public static string GetPropertyValue(object item, string propertyName)
-        {
-            string retVal = string.Empty;
-
-            try
-            {
-                retVal = item.GetType().GetProperty(propertyName).GetValue(item).ToString();
-            }
-            catch (Exception ex)
-            {
-                string msg = ex.Message;
-            }
-
-            return retVal;
-        }
-
-        /// <summary>
-        /// WARNING: This is a case-sensitive function, because C# properties are case-sensitive when using Reflection!
-        /// </summary>
-        public static void SetPropertyValue(object item, string propertyName, string newVal)
-        {               
-            try
-            {
-                var r = new ReflectionCommon();
-                r.SetValue(item, propertyName, newVal);
-            }
-            catch (Exception ex)
-            {
-                string msg = ex.Message;
-            }
-        }
-
-        public static string GetExecutingDirectory()
-        {
-            FileSystemManager f1 = new FileSystemManager();
-            string directory = f1.GetBaseDirectory();   //This is a misleading name, that's why I'm wrapping it inside a more accurate name
-
-            return directory;
-        }
-
-        public static string GetApplicationOutputDirectoryDirectory()
-        {
-            FileSystemManager f1 = new FileSystemManager();
-            string outputDir = string.Empty;
-
-            string executingDirectory = GetExecutingDirectory();
-
-            IList<string> applicationDirectories = executingDirectory.Split('\\').Where(c=>c.ToString().Length>0).ToList();
-
-            for (int i = 0; i < applicationDirectories.Count; i++)
-            {
-                outputDir = outputDir + (i==0 ? "" : "\\") + applicationDirectories[i];
-                if (f1.DirectoryExists(outputDir + "\\output"))
-                {
-                    outputDir = outputDir + "\\output";                    
-                }
-            }
-            return (!string.IsNullOrEmpty(outputDir) && outputDir.Contains("\\output") ? outputDir : string.Empty);
-        }
-
-        public static void CreateApplicationOutputDirectory()
-        {
-            FileSystemManager f1 = new FileSystemManager();
-            string baseDir = GetApplicationOutputDirectoryDirectory();
-            f1.CreateDirectory($@"{baseDir}\output");
-        }
-
-        //Btw, a variant of this is found in the WTF library, but this is the only func in that library.  I removed a hard coded string, "BOC", from the WTF version
-        public static string GetJamesBond()
-        {
-            string identityName =  WindowsIdentity.GetCurrent().Name;
-            string jamesBond = WTF.Core.Extensions.String.StringExtensions.GetLastToken(identityName, '\\');
-            return jamesBond;
-        }
-        public static string FormatToYyyyMm(DateTime dt)
-        {
-            return dt.Year.ToString() + dt.Month.ToString().PadLeft(2, '0');
-        }
-        public static bool StringHasData(string s)
-        {
-            bool retVal = false;
-
-            retVal = !(string.IsNullOrWhiteSpace(s));
-            return retVal;
-        }
-        
-
-        #region "Not in WTF library but should be!"
+    public static class Serializer
+    {       
         public static string SerializeObjectToXmlString(object serializableTarget)
         {
             //From: https://stackoverflow.com/questions/1772004/how-can-i-make-the-xmlserializer-only-serialize-plain-xml
@@ -155,12 +64,7 @@ namespace TmoLibrary.Common
 
             return item;
         }
-        public static bool IsWellFormedXml(string xml)
-        {
-            XmlUtility x = new XmlUtility();
 
-            return XmlUtility.IsWellFormedXml(xml);
-        }
         public static bool SerializeObjectToXmlFile(string fullFileName, object objectForSerialization, bool stripXmlDirective)
         {
             bool retVal = false;
@@ -198,8 +102,6 @@ namespace TmoLibrary.Common
             string style = transformer.ReadStyleSheet(styleSheetFileFullPathAndName);            
 
             transformer.Transform(input, style, outputfileFullPathAndName);
-
         }
-        #endregion
     }
 }
