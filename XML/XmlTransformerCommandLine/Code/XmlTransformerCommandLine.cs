@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using WTF.Core.Xml;
 
-namespace XmlXslTransformer
+namespace XmlTransformerCommandLine
 {
     class Program
     {
