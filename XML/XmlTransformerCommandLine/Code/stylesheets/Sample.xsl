@@ -4,7 +4,7 @@
 
     <xsl:template match="NewDataSet">
 	   <DOC>
-	      <LANGUAGE name="Minhast">
+	      <LANGUAGE name="MyConlang">
 		     
 			 <xsl:apply-templates select="Nouns"/>
 			 <xsl:apply-templates select="Verbs"/>
