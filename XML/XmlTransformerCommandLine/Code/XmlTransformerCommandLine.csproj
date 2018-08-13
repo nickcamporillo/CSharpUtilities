@@ -44,7 +44,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="XmlTransformerCommandLine.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
